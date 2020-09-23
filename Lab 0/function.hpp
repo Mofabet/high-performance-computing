@@ -1,5 +1,5 @@
-#ifndef MY_FUNCTIONS
-#define MY_FUNCTIONS
+#ifndef FUNCTIONS
+#define FUNCTIONS
 
 int factorial(int n);
 
