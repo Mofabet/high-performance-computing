@@ -14,8 +14,9 @@ int main () {
     double F(double u,double t, double r);
     double x, t, f, bigD, bigC, bigX;
     double dx, dt;
-    double K, K1, K2;
-    int A, B, C, N;
+    double K1, K2;
+    int A, B, C, Ns;
+    int i, k;
 
     //U[(int)n]; double T[(int)n]; double R[(int)n]; // det n as a constant
     //U[0]=a; //T-R
@@ -35,12 +36,23 @@ int main () {
     }
 
     
-    for(int i) i = 1; i <= N-1; i++){
+    for(int i) i = 1; i <= Ns-1; i++){
          bigX[i] = 0;
          //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
     }
+    // задание граничных условий 
+    // Кельв1 - Tl, Кельв 2 - Tr
 
-    for(int i=0; i <= N; i++){
+    for (int k = 0; k <= A; k++){
+        bigX[0] = K1; //??? 
+        bigX[Ns-1] = K2; // теперь обане работают
+        
+        //U=(bigC/2)*
+
+
+    }
+
+    for(int i=0; i <= Ns; i++){
 
         cout << "U["<<i<<"]="<<X[i] <<" ";
     }
