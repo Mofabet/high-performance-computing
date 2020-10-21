@@ -44,12 +44,11 @@ int main () {
     // Кельв1 - Tl, Кельв 2 - Tr
 
     for (int k = 0; k <= A; k++){
-        bigX[0] = K1; //??? 
-        bigX[Ns-1] = K2; // теперь обане работают
-        
-        //U=(bigC/2)*
-
-
+        bigX[0][k] = K1; //??? 
+        bigX[Ns-1][k] = K2; // теперь обане работают
+        for (int i ...){
+        //U[i]=(bigC/2)*U[i-1][k]+(1-bigC)*U[i][k]+(bigC/2)*U[i+1][k]+(dtf);
+        }
     }
 
     for(int i=0; i <= Ns; i++){
