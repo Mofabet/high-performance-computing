@@ -16,7 +16,7 @@ int main () {
     double U, C, D;
     double dx, dt;
     double K1, K2;
-    int i, k, Ns;
+    int i, k, Ns, Time;
     int A, B; // counters
 
     //U[(int)n]; double T[(int)n]; double R[(int)n]; // det n as a constant
@@ -34,8 +34,11 @@ int main () {
 
     if (C > 1) {
         //проверить устойчивость
+        goto skip;
     }
 
+    Ns = x/dx;
+    Time = t/dt;
     
     for(int i) i = 1; i <= Ns-1; i++){
          U[i] = 0;
@@ -48,7 +51,7 @@ int main () {
         U[0][k] = K1; //??? 
         U[Ns-1][k] = K2; // теперь обане работают
         for (int i ...){
-        //U[i]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
+        U[i]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
         }
     }
 
@@ -60,5 +63,8 @@ int main () {
     for(int i=0; i<=n; i++){
         cout << "T["<<i<<"]="<<Y[i] << " "; //re all
     }
+    
+    skip:
+    cout << "The scheme is unstable" << endl;
     return 0;
 }
