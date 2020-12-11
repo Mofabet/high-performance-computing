@@ -5,8 +5,9 @@ enable_language(Fortran)
 
 set(CMAKE_CXX_STANDARD 11)
 
+find_package(LAPACK REQUIRED)
 find_package(MPI COMPONENTS Fortran REQUIRED)
 
-add_executable(main.cpp)
+add_executable(main.cpp fact.f90)
 
-target_link_libraries(???)
+target_link_libraries(exec_name ${LAPACK_LIBRARIES})
