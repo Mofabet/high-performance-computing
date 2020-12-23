@@ -12,12 +12,12 @@ using namespace std;
 
 int main () {
     double F(double u,double t, double r);
-    double x, t, f;
+    double x, t, fold;
     double C, D;
     double dx, dt, dtf;
    // double K1, K2;
-    double Tl, Tr;
-    int i, k, Ns, Ts;
+    double T_l, T_r;
+    int i, k, Ns, T_s;
     int A, B; // counters
 
     //U[(int)n]; double T[(int)n]; double R[(int)n]; // det n as a constant
@@ -44,14 +44,14 @@ int main () {
     }
 
     Ns = x/dx;
-    Ts = t/dt;
+    T_s = t/dt;
     double U[Ns][Ts];
-    //явная
+    //явная////////////////////
     {
         // задание граничных условий 
         // Кельв1 - Tl, Кельв 2 - Tr
-        U[0][0] = Tl; //??? 
-        U[Ns-1][0] = Tr; // теперь оба не работают
+        U[0][0] = T_l; //??? 
+        U[Ns-1][0] = T_r; // теперь оба не работают
     
         for(int i) i = 1; i <= Ns-1; i++){
              U[i][0] = 0;
@@ -59,8 +59,8 @@ int main () {
         }
         
         for (int k = 0; k <= A; k++){
-            U[-1][k] = Tl; //??? 
-            U[Ns-1][k] = Tr; // теперь оба не работают
+            U[-1][k] = T_l; //??? 
+            U[Ns-1][k] = T_r; // теперь оба не работают
             for (int i = 1; k = 1 < Ns-1; k++){
                 //dtf = dt*???
                 U[i][k+1]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
@@ -79,9 +79,38 @@ int main () {
             cout << "U["<<i<<"]="<<X[i] << " ";
             }
     }
-    //неявная
+    //неявная////////////////////////////////
     {
-        g
+        double A, B, F, E; //много повторяется
+        double alf_0, bet_0;
+        double alf_i, bet_1;
+
+        U[0][0] = T_l; //??? 
+        U[Ns-1][0] = T_r;
+        
+        for(int i) i = 1; i <= Ns-1; i++){
+             U[i][0] = 0;
+             //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
+             //for(int i) i = 1; i <= Ns-1; i++){
+             //U[i][0] = 0;
+             ////Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
+        }
+        for(int i) i = 1; i <= Ns-1; i++){
+             F[i][0] = 0;//F[i][k] 
+             //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
+        }
+        }
+        
+        for (int k = 0; k <= A; k++){
+            U[-1][k] = T_l; //??? 
+            U[Ns-1][k] = T_r; // теперь оба не работают
+            for (int i = 1; k = 1 < Ns-1; k++){
+                //dtf = dt*???
+                U[i][k+1]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
+            }
+        }
+
+
     }
     skip:
     cout << "The scheme is unstable" << endl;
