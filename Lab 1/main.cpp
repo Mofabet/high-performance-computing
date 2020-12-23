@@ -14,7 +14,7 @@ int main () {
     double F(double u,double t, double r);
     double x, t, f;
     double C, D;
-    double dx, dt;
+    double dx, dt, dtf;
    // double K1, K2;
     double Tl, Tr;
     int i, k, Ns, Ts;
@@ -46,35 +46,43 @@ int main () {
     Ns = x/dx;
     Ts = t/dt;
     double U[Ns][Ts];
+    //явная
+    {
+        // задание граничных условий 
+        // Кельв1 - Tl, Кельв 2 - Tr
+        U[0][0] = Tl; //??? 
+        U[Ns-1][0] = Tr; // теперь оба не работают
     
-    // задание граничных условий 
-    // Кельв1 - Tl, Кельв 2 - Tr
-    U[0][0] = Tl; //??? 
-    U[Ns-1][0] = Tr; // теперь оба не работают
-
-    for(int i) i = 1; i <= Ns-1; i++){
-         U[i][0] = 0;
-         //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
-    }
-    
-    for (int k = 0; k <= A; k++){
-        U[-1][k] = Tl; //??? 
-        U[Ns-1][k] = Tr; // теперь оба не работают
-        for (int i ...){
-            //dtf = dt*???
-            U[i]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
+        for(int i) i = 1; i <= Ns-1; i++){
+             U[i][0] = 0;
+             //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
         }
+        
+        for (int k = 0; k <= A; k++){
+            U[-1][k] = Tl; //??? 
+            U[Ns-1][k] = Tr; // теперь оба не работают
+            for (int i = 1; k = 1 < Ns-1; k++){
+                //dtf = dt*???
+                U[i][k+1]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
+            }
+        }
+        // По какой то причине не определяется корректно
+        // Определить порядок
+        //for(int i=0; i <= Ns; i++){ 
+        //    cout << "U["<<i<<"]="<<X[i] <<" ";
+        //}
+        cout << endl;
+        for(int i=0; i <= Ns; i++){
+            cout << "T["<<i<<"]="<<Y[i] << " "; //re all
+        }
+        for(int i=0; i <= Ns; i++){
+            cout << "U["<<i<<"]="<<X[i] << " ";
+            }
     }
-
-    for(int i=0; i <= Ns; i++){
-
-        cout << "U["<<i<<"]="<<X[i] <<" ";
+    //неявная
+    {
+        g
     }
-    cout << endl;
-    for(int i=0; i<=n; i++){
-        cout << "T["<<i<<"]="<<Y[i] << " "; //re all
-    
-    
     skip:
     cout << "The scheme is unstable" << endl;
     return 0;
