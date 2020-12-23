@@ -83,7 +83,7 @@ int main () {
     {
         double A, B, F, E; //много повторяется
         double alf_0, bet_0;
-        double alf_i, bet_1;
+        double alf_i, bet_i;
 
         U[0][0] = T_l; //??? 
         U[Ns-1][0] = T_r;
@@ -99,8 +99,17 @@ int main () {
              F[i][0] = 0;//F[i][k] 
              //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
         }
-        }
+        double hotfix;
+        A = 0;
+        B = 0;
+        alf_0[0] = E/B;
+        bet_0[0] = F[0][k]/B;
+
+        alf_i = E/(B-A*alf_i[i-1]);
+        bet_i = (F[i][k]-A*bet_i[i-1])/(B-A*alf_i[i-1]);
         
+        //U*N[s-1][k+1] = bet*N[s-1]; ????????
+        U[i][k+1] = bet_i[i]-alf_i[i]*u[i+1][k+1];//i = Ns-2 ... 0 можно поместить в один цикл
         for (int k = 0; k <= A; k++){
             U[-1][k] = T_l; //??? 
             U[Ns-1][k] = T_r; // теперь оба не работают
