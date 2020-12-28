@@ -59,7 +59,7 @@ int main () {
         }
         
         for (int k = 0; k <= A; k++){
-            U[-1][k] = T_l; //??? 
+            U[-1][k] = T_l; //??? 0?
             U[Ns-1][k] = T_r; // теперь оба не работают
             for (int i = 1; k = 1 < Ns-1; k++){
                 //dtf = dt*???
@@ -84,18 +84,19 @@ int main () {
         double A, B, F, E; //много повторяется
         double alf_0, bet_0;
         double alf_i, bet_i;
+        double diag_11, diag_12;
 
         U[0][0] = T_l; //??? 
         U[Ns-1][0] = T_r;
         
-        for(int i) i = 1; i <= Ns-1; i++){
+        for (i = 1; i <= Ns-1; i++){
              U[i][0] = 0;
              //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
              //for(int i) i = 1; i <= Ns-1; i++){
              //U[i][0] = 0;
              ////Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
         }
-        for(int i) i = 1; i <= Ns-1; i++){
+        for (i = 1; i <= Ns-1; i++){
              F[i][0] = 0;//F[i][k] 
              //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
         }
@@ -105,21 +106,37 @@ int main () {
         alf_0[0] = E/B;
         bet_0[0] = F[0][k]/B;
 
-        alf_i = E/(B-A*alf_i[i-1]);
-        bet_i = (F[i][k]-A*bet_i[i-1])/(B-A*alf_i[i-1]);
         
+        
+
+        // знаем что в C?
+        diag_11 = -1-C;
+        diag_12 = C/2;
+
+
+
         //U*N[s-1][k+1] = bet*N[s-1]; ????????
-        U[i][k+1] = bet_i[i]-alf_i[i]*u[i+1][k+1];//i = Ns-2 ... 0 можно поместить в один цикл
-        for (int k = 0; k <= A; k++){
-            U[-1][k] = T_l; //??? 
-            U[Ns-1][k] = T_r; // теперь оба не работают
-            for (int i = 1; k = 1 < Ns-1; k++){
-                //dtf = dt*???
-                U[i][k+1]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
+        
+        for (int k = 0; k <= T_s; k++){
+            alf_0[0] = 0;
+            bet_0[0] = T_l;
+            U[0][k+1] = T_l; //??? 0?
+            U[Ns-1][k+1] = T_r; // теперь оба не работают
+            for (int i = 1; i < Ns-1; i++){//a chto s K?
+                E = diag_12;
+                B = diag_11;
+                A = diag_12;
+                alf_i[i] = E/(B-A*alf_i[i-1]);
+                bet_i[i] = (F[i][k]-A*bet_i[i-1])/(B-A*alf_i[i-1]);
+            }
+            for (int i = 1; i < Ns; i++){
+                U[(Ns-1)-i][k+1] = bet_i[(Ns-1)-i]-alf_i[(Ns-1)-i]*U[(Ns-1)-i+1][k+1];//i = Ns-2 ... 0 можно поместить в один цикл
+            }
+            for (int i = 1; i < Ns-1; i++){
+                F[i-1] = U[i][k+1];
             }
         }
-
-
+        //print
     }
     skip:
     cout << "The scheme is unstable" << endl;
