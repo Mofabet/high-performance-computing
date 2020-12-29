@@ -13,12 +13,12 @@ using namespace std;
 int main () {
     double F(double u,double t, double r);
     double x, t, fold;
-    double C, D;
+    double A, B, C, D;
     double dx, dt, dtf;
    // double K1, K2;
     double T_l, T_r;
     int i, k, Ns, T_s;
-    int A, B; // counters
+    //int ; // counters
 
     //U[(int)n]; double T[(int)n]; double R[(int)n]; // det n as a constant
     //U[0]=a; //T-R
@@ -51,18 +51,18 @@ int main () {
         // задание граничных условий 
         // Кельв1 - Tl, Кельв 2 - Tr
         U[0][0] = T_l; //??? 
-        U[Ns-1][0] = T_r; // теперь оба не работают
+        U[Ns-1][0] = T_r; // 
     
-        for(int i) i = 1; i <= Ns-1; i++){
+        for(int i = 1; i <= Ns-1; i++){
              U[i][0] = 0;
              //Y[i]=Y[i-1]+h*F(X[i-1],Y[i-1]);
         }
         
-        for (int k = 0; k <= A; k++){
+        for(int k = 0; k <= A; k++){
             U[-1][k] = T_l; //??? 0?
-            U[Ns-1][k] = T_r; // теперь оба не работают
+            U[Ns-1][k] = T_r; // теперь оба работают!!!!
             for (int i = 1; k = 1 < Ns-1; k++){
-                //dtf = dt*???
+                dtf = dt*(sin(U[i][k])); // фи любая?
                 U[i][k+1]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
             }
         }
@@ -72,16 +72,16 @@ int main () {
         //    cout << "U["<<i<<"]="<<X[i] <<" ";
         //}
         cout << endl;
-        for(int i=0; i <= Ns; i++){
+        for(int i = 0; i <= Ns; i++){
             cout << "T["<<i<<"]="<<Y[i] << " "; //re all
         }
-        for(int i=0; i <= Ns; i++){
+        for(int i = 0; i <= Ns; i++){
             cout << "U["<<i<<"]="<<X[i] << " ";
             }
     }
     //неявная////////////////////////////////
     {
-        double A, B, F, E; //много повторяется
+        double F, E; //много повторяется
         double alf_0, bet_0;
         double alf_i, bet_i;
         double diag_11, diag_12;
