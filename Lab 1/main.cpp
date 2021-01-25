@@ -25,6 +25,22 @@ int main () {
 
     //определение переменных (вынести отдельно?)
     // cin - ввод с клав-ры
+    count << "The program initialized successfully";
+    count << "Enter the startup parameters to start the calculation";
+    count << "Length of the rod (x)";
+    cin >> x;
+    count << "Length change step (dx)";
+    cin >> dx;
+    count << "Temperature on the left crown of the rod (T_l)";
+    cin >> T_l;
+    count << "Temperature on the right crown of the rod (T_r)";
+    cin >> T_r;
+    count << "Time (t)";
+    cin >> t;
+    count << "Time change step (dt)";
+    cin >> dt;
+    count << "Coefficient of thermal diffusion (D>0)";
+    cin >> D;
 
 //расчет С
 
@@ -61,7 +77,7 @@ int main () {
         for(int k = 0; k <= A; k++){
             U[-1][k] = T_l; //??? 0?
             U[Ns-1][k] = T_r; // теперь оба работают!!!!
-            for (int i = 1; k = 1 < Ns-1; k++){
+            for (int i = 1; k < Ns-1; k++){ // было k = 1? 
                 dtf = dt*(sin(U[i][k])); // фи любая?
                 U[i][k+1]=(C/2)*U[i-1][k]+(1-C)*U[i][k]+(C/2)*U[i+1][k]+(dtf);
             }
@@ -71,13 +87,14 @@ int main () {
         //for(int i=0; i <= Ns; i++){ 
         //    cout << "U["<<i<<"]="<<X[i] <<" ";
         //}
-        cout << endl;
+        cout << "*Дошли до вывода*"<< endl; // ЧТО ЭТО ТАКОЕ? будет уткой
         for(int i = 0; i <= Ns; i++){
             cout << "T["<<i<<"]="<<Y[i] << " "; //re all
         }
         for(int i = 0; i <= Ns; i++){
             cout << "U["<<i<<"]="<<X[i] << " ";
             }
+            //print
     }
     //неявная////////////////////////////////
     {
@@ -136,7 +153,8 @@ int main () {
                 F[i-1] = U[i][k+1];
             }
         }
-        //print
+        for (int i = 0; i < Ns; i++){
+          cout << "U["<< i << "][" << T_s << "] = " << U[i][T_s] << "\n";
     }
     skip:
     cout << "The scheme is unstable" << endl;
